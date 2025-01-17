@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * 
+ * @param {Number} rateWinner 
+ * @param {Number} rateLoser 
+ * @returns number or error
+ */
 function calculateNewRate (rateWinner, rateLoser) {
   if(Number.isNaN(rateWinner-rateLoser) === true || typeof rateWinner !== 'number'  || typeof rateLoser !== 'number' ||rateWinner < 0 || rateLoser < 0) {
     return 'can not be calculated. Invalid rate. Enter not negative numbers';
