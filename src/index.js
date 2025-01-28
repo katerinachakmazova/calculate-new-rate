@@ -4,37 +4,35 @@
  * 
  * @param {Number} rateWinner 
  * @param {Number} rateLoser 
- * @returns number or error
+ * @returns {Number} 
  */
 function calculateNewRate (rateWinner, rateLoser) {
-  if(Number.isNaN(rateWinner-rateLoser) === true || typeof rateWinner !== 'number'  || typeof rateLoser !== 'number' ||rateWinner < 0 || rateLoser < 0) {
-    return 'can not be calculated. Invalid rate. Enter not negative numbers';
+  let rateDifference = rateWinner - rateLoser;
+  if(Number.isNaN(rateDifference) || typeof rateWinner !== 'number'  || typeof rateLoser !== 'number' ||rateWinner < 0 || rateLoser < 0) {
+    return -1;
   }
   if ( rateWinner === 0 ){
-    rateWinner =rateLoser;
-    return rateWinner;
+    return rateLoser;
   }
-  else if (rateWinner- rateLoser>=0 && rateWinner- rateLoser<=2 ) {
-    return rateWinner+2;
+  if (rateDifference >= 0 && rateDifference <= 2 ) {
+    return rateWinner + 2;
   }
-  else if (rateWinner- rateLoser>2 && rateWinner- rateLoser<20){
+  if (rateDifference > 2 && rateDifference < 20){
     return rateWinner+1;
   }
-  else if (rateWinner- rateLoser>=20){
+  if (rateDifference >= 20){
     return rateWinner;
   }
-  else if (rateWinner - rateLoser <0) {
-    rateWinner += (rateLoser - rateWinner+5)/3;
-    return rateWinner.toFixed(1);
+  if (rateDifference < 0) {
+    return rateWinner + (rateLoser - rateWinner + 5) / 3;
   }
 }
-console.log(`New rate of the winner: ${calculateNewRate(-5, 10)}`);
-console.log(`New rate of the winner: ${calculateNewRate(NaN, 10)}`);
-console.log(`New rate of the winner: ${calculateNewRate(10, '123')}`);
-console.log(`New rate of the winner: ${calculateNewRate(15, 10)}`); 
-console.log(`New rate of the winner: ${calculateNewRate(20, 0)}`);
-console.log(`New rate of the winner: ${calculateNewRate(10, 14)}`);
-console.log(`New rate of the winner: ${calculateNewRate(0, 16)}`);
-console.log(`New rate of the winner: ${calculateNewRate(15, 14)}`);
+let result = calculateNewRate(15, 14);
+if (result === -1){
+  console.log('Invalid input');
+}
+else {
+  console.log(`New rate of the winner: ${result.toFixed(1)}`);
+};
 
 
